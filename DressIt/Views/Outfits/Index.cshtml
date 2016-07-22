@@ -1,0 +1,55 @@
+﻿@model IEnumerable<DressIt.Models.Outfit>
+
+@{
+    ViewBag.Title = "Outfits";
+}
+
+<h2>Outfits</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            Top
+        </th>
+        <th>
+          Bottom
+        </th>
+        <th>
+           Shoes
+        </th>
+        <th>
+            Accessories
+        </th>
+    </tr>
+    @*item repesents single outfit*@
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Top.Name)
+            @*@item.Top.Name <<--- can use this in special cases*@
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Bottom.Name)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Shoes.Name)
+        </td>
+        <td>
+            @foreach (var accessory in item.Accessories)
+            {
+            @Html.DisplayFor(modelItem => accessory.Name) 
+            }
+            
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.OutfitID }) |
+            @Html.ActionLink("Details", "Details", new { id=item.OutfitID }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.OutfitID })
+        </td>
+    </tr>
+}
+
+</table>
